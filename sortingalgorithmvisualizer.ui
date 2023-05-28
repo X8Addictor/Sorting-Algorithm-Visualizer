@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SortingAlgorithmVisualizer</class>
+ <widget class="QMainWindow" name="SortingAlgorithmVisualizer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Sorting Algorithms Visualizer</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="arrayLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>300</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Array of Integers:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="algorithmLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>40</y>
+      <width>300</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sorting Algorithm:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="algorithmCombo">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>90</y>
+      <width>300</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Bubble Sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Selection Sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Insertion Sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Merge Sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Quick Sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Heap Sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Radix Sort</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="complexityLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>160</y>
+      <width>300</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Time Complexity:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="timeLabel">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>550</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sort Time:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="speedLabel">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>570</y>
+      <width>300</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sorting Speed (ms)</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="speedSlider">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>620</y>
+      <width>300</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>10</number>
+    </property>
+    <property name="maximum">
+     <number>1000</number>
+    </property>
+    <property name="value">
+     <number>500</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="speedValueLabel">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>600</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>500 ms</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="startButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>610</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stopButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>610</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="generateArrayButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>570</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generate Array</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="arraySizeLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>210</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enter Array Size:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="rangeLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>270</y>
+      <width>130</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enter Range Of Integers:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="startLabel">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>250</y>
+      <width>30</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="arraySizeLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>210</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="rangeEndLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>270</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="rangeStartLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>270</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="endLabel">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>250</y>
+      <width>25</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>End:</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="arrayTableView">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>401</width>
+      <height>491</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
