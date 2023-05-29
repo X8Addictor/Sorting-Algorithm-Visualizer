@@ -33,12 +33,12 @@ private:
     QVector<int> mergeSortRecursive(const QVector<int>& array);
     QVector<int> merge(const QVector<int>& left, const QVector<int>& right);
     QVector<int> quickSort();
-    QVector<int> quickSortRecursive(QVector<int>& array, int low, int high);
-    int partition(QVector<int>& array, int low, int high);
+    QVector<int> quickSortRecursive(QVector<int>& array, int start, int end);
+    int partition(QVector<int>& array, int start, int end);
     QVector<int> heapSort();
-    void heapify(QVector<int>& array, int size, int rootIndex);
+    void heapify(QVector<int>& array, int size, int parentIndex);
     QVector<int> radixSort();
-    void countingSort(QVector<int>& array, int size, int exp);
+    void countingSort(QVector<int>& array, int size, int pos);
     void swap(QVector<int>& array, int index1, int index2);
 };
 #endif // SORTINGALGORITHMVISUALIZER_H

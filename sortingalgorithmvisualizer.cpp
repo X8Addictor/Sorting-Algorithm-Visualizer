@@ -115,92 +115,106 @@ void SortingAlgorithmVisualizer::generateArray(int size, int start, int end, QVe
     }
 }
 
-// Functions for sorting algorithms
+// Bubble sort function
 QVector<int> SortingAlgorithmVisualizer::bubbleSort()
 {
     QVector<int> sortedArray;
 
     // Performing bubble sort
-    int n = unsortedArray.size();
+    int size = unsortedArray.size();
     sortedArray = unsortedArray;
 
-    for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (sortedArray[j] > sortedArray[j + 1]) {
-                    swap(sortedArray, j, j + 1);
-                }
+    for (int i = 0; i < size - 1; i++)
+    {
+        for (int j = 0; j < size - i - 1; j++)
+        {
+            if (sortedArray[j] > sortedArray[j + 1])
+            {
+                swap(sortedArray, j, j + 1); // Swap with right adjacent value
             }
+        }
     }
 
     return sortedArray;
 }
 
+// Selection sort function
 QVector<int> SortingAlgorithmVisualizer::selectionSort()
 {
     QVector<int> sortedArray;
 
     // Performing selection sort
-    int n = unsortedArray.size();
+    int size = unsortedArray.size();
     sortedArray = unsortedArray;
 
-    for (int i = 0; i < n - 1; i++) {
-            int minIndex = i;
-            for (int j = i + 1; j < n; j++) {
-                if (sortedArray[j] < sortedArray[minIndex]) {
-                    minIndex = j;
-                }
+    for (int i = 0; i < size - 1; i++)
+    {
+        int minIndex = i; // Assiging minIndex of the current iteration
+        for (int j = i + 1; j < size; j++)
+        {
+            if (sortedArray[j] < sortedArray[minIndex])
+            {
+                minIndex = j; // Reassigning minIndex if lower value is found
             }
-            swap(sortedArray, minIndex, i);
+        }
+        swap(sortedArray, minIndex, i); // Swap minIndex value to current index
     }
 
     return sortedArray;
 }
 
+// Insertion sort function
 QVector<int> SortingAlgorithmVisualizer::insertionSort()
 {
     QVector<int> sortedArray;
 
     // Performing insertion sort
-    int n = unsortedArray.size();
+    int size = unsortedArray.size();
     sortedArray = unsortedArray;
 
-    for (int i = 1; i < n; i++) {
-            int key = sortedArray[i];
-            int j = i - 1;
-            while (j >= 0 && sortedArray[j] > key) {
-                sortedArray[j + 1] = sortedArray[j];
-                j--;
-            }
-            sortedArray[j + 1] = key;
+    for (int i = 1; i < size; i++)
+    {
+        int key = sortedArray[i]; // Temporary key to compare with left adjacent values
+        int j = i - 1;
+        while (j >= 0 && sortedArray[j] > key)
+        {
+            sortedArray[j + 1] = sortedArray[j]; // Shifting values to left if current index value is greater than key
+            j--;
+        }
+        sortedArray[j + 1] = key; // Moving key to current index after left shift
     }
 
     return sortedArray;
 }
 
+// Merge sort function
 QVector<int> SortingAlgorithmVisualizer::mergeSort()
 {
     QVector<int> sortedArray;
 
     // Performing merge sort
-    sortedArray = mergeSortRecursive(unsortedArray);
+    sortedArray = mergeSortRecursive(unsortedArray); // Recursively splitting, sorting and merging the array
 
     return sortedArray;
 }
 
+// Helper function to split the array from the middle
 QVector<int> SortingAlgorithmVisualizer::mergeSortRecursive(const QVector<int>& array)
 {
-    int n = array.size();
-    if (n <= 1) {
-            return array;
+    int size = array.size();
+    if (size <= 1) // Base case
+    {
+        return array;
     }
 
-    int mid = n / 2;
-    QVector<int> left = mergeSortRecursive(array.mid(0, mid));
-    QVector<int> right = mergeSortRecursive(array.mid(mid));
+    int mid = size / 2; // Middle index
+    QVector<int> left = mergeSortRecursive(array.mid(0, mid)); // Recursive call for left side array
+    QVector<int> right = mergeSortRecursive(array.mid(mid)); // Recursive call for right side array
 
     return merge(left, right);
 }
 
+// Helper function to merge the array
 QVector<int> SortingAlgorithmVisualizer::merge(const QVector<int>& left, const QVector<int>& right)
 {
     int leftSize = left.size();
@@ -208,71 +222,83 @@ QVector<int> SortingAlgorithmVisualizer::merge(const QVector<int>& left, const Q
     int i = 0, j = 0, k = 0;
     QVector<int> mergedArray(leftSize + rightSize);
 
-    while (i < leftSize && j < rightSize) {
-            if (left[i] <= right[j]) {
-                mergedArray[k] = left[i];
-                i++;
-            } else {
-                mergedArray[k] = right[j];
-                j++;
-            }
-            k++;
-    }
-
-    while (i < leftSize) {
-            mergedArray[k] = left[i];
+    while (i < leftSize && j < rightSize)
+    {
+        if (left[i] <= right[j])
+        {
+            mergedArray[k] = left[i]; // Adding left array value if smaller than right array value
             i++;
-            k++;
+        } else
+        {
+            mergedArray[k] = right[j]; // Adding right array value if smaller than left array value
+            j++;
+        }
+        k++;
     }
 
-    while (j < rightSize) {
-            mergedArray[k] = right[j];
-            j++;
-            k++;
+    while (i < leftSize)
+    {
+        mergedArray[k] = left[i]; // Adding remaining left array values
+        i++;
+        k++;
+    }
+
+    while (j < rightSize)
+    {
+        mergedArray[k] = right[j]; // Adding remaining right array values
+        j++;
+        k++;
     }
 
     return mergedArray;
 }
 
+// Quick sort function
 QVector<int> SortingAlgorithmVisualizer::quickSort()
 {
     QVector<int> sortedArray;
 
     // Performing quick sort
-    sortedArray = quickSortRecursive(unsortedArray, 0, unsortedArray.size() - 1);
+    sortedArray = quickSortRecursive(unsortedArray, 0, unsortedArray.size() - 1); // Recursively splitting, sorting and merging the array
 
     return sortedArray;
 }
 
-QVector<int> SortingAlgorithmVisualizer::quickSortRecursive(QVector<int>& array, int low, int high)
+// Helper function
+QVector<int> SortingAlgorithmVisualizer::quickSortRecursive(QVector<int>& array, int start, int end)
 {
-    if (low < high) {
-            int pivotIndex = partition(array, low, high);
-            quickSortRecursive(array, low, pivotIndex - 1);
-            quickSortRecursive(array, pivotIndex + 1, high);
+    if (end <= start) // Base case
+    {
+        return array;
     }
+
+    int pivotIndex = partition(array, start, end);
+    quickSortRecursive(array, start, pivotIndex - 1); // Recursive call for left side array
+    quickSortRecursive(array, pivotIndex + 1, end); // Recursive call for right side array
 
     return array;
 }
 
-int SortingAlgorithmVisualizer::partition(QVector<int>& array, int low, int high)
+// Helper function to split the array based on the pivot value
+int SortingAlgorithmVisualizer::partition(QVector<int>& array, int start, int end)
 {
-    int pivot = array[high];
-    int i = low - 1;
+    int pivot = array[end]; // Assigning the last index value as pivot value
+    int i = start - 1;
 
-    for (int j = low; j <= high - 1; j++) {
-            if (array[j] <= pivot) {
-                i++;
-                swap(array, i, j);
-            }
+    for (int j = start; j <= end - 1; j++)
+    {
+        if (array[j] <= pivot) {
+            i++;
+            swap(array, i, j); // Swap current index value if greater than pivot value
+        }
     }
 
-    // Swap the pivot element
-    swap(array, i + 1, high);
+    swap(array, i + 1, end); // Swaping the pivot element
 
-    return i + 1;
+    return i + 1; // Returning the pivot index
 }
 
+// Heap sort function
 QVector<int> SortingAlgorithmVisualizer::heapSort()
 {
     QVector<int> sortedArray;
@@ -281,40 +307,47 @@ QVector<int> SortingAlgorithmVisualizer::heapSort()
     int n = unsortedArray.size();
     sortedArray = unsortedArray;
 
-    for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(sortedArray, n, i);
+    // First loop to create max heap tree structure to start sorting
+    for (int i = n / 2 - 1; i >= 0; i--)
+    {
+        heapify(sortedArray, n, i);
     }
 
-    for (int i = n - 1; i > 0; i--) {
-            swap(sortedArray, 0, i);
-
-            heapify(sortedArray, i, 0);
+    // Second loop to sort and create max heap structure after an iteration of sorting
+    for (int i = n - 1; i > 0; i--)
+    {
+        swap(sortedArray, 0, i);
+        heapify(sortedArray, i, 0);
     }
 
     return sortedArray;
 }
 
-void SortingAlgorithmVisualizer::heapify(QVector<int>& array, int size, int rootIndex)
+// Helper function to rearrange the elements in max heap format
+void SortingAlgorithmVisualizer::heapify(QVector<int>& array, int size, int parentIndex)
 {
-    int largest = rootIndex;
-    int leftChild = 2 * rootIndex + 1;
-    int rightChild = 2 * rootIndex + 2;
+    int largest = parentIndex; // Root node
+    int leftChild = 2 * parentIndex + 1; // Child node on the left
+    int rightChild = 2 * parentIndex + 2; // Child note on the right
 
-    if (leftChild < size && array[leftChild] > array[largest]) {
-            largest = leftChild;
+    if (leftChild < size && array[leftChild] > array[largest])
+    {
+        largest = leftChild; // Assigns index of left child node if greater than parent node
     }
 
-    if (rightChild < size && array[rightChild] > array[largest]) {
-            largest = rightChild;
+    if (rightChild < size && array[rightChild] > array[largest])
+    {
+        largest = rightChild; // Assigns index of right child node if greater than parent node
     }
 
-    if (largest != rootIndex) {
-            swap(array, rootIndex, largest);
-
-            heapify(array, size, largest);
+    if (largest != parentIndex)
+    {
+        swap(array, parentIndex, largest); // Swap if parent node is not greater of left and right child node
+        heapify(array, size, largest);
     }
 }
 
+// Radix sort function
 QVector<int> SortingAlgorithmVisualizer::radixSort()
 {
     QVector<int> sortedArray;
@@ -323,49 +356,58 @@ QVector<int> SortingAlgorithmVisualizer::radixSort()
     int n = unsortedArray.size();
     sortedArray = unsortedArray;
 
-    // Find the maximum element to determine the number of digits
+    // Finding the maximum element to determine the number of digits
     int maxElement = sortedArray[0];
-    for (int i = 1; i < n; i++) {
-            if (sortedArray[i] > maxElement) {
-                maxElement = sortedArray[i];
-            }
+    for (int i = 1; i < n; i++)
+    {
+        if (sortedArray[i] > maxElement)
+        {
+            maxElement = sortedArray[i];
+        }
     }
 
-    // Perform counting sort for each digit
-    for (int exp = 1; maxElement / exp > 0; exp *= 10) {
-            countingSort(sortedArray, n, exp);
+    // Performing counting sort for each digit
+    for (int pos = 1; maxElement / pos > 0; pos *= 10)
+    {
+        countingSort(sortedArray, n, pos);
     }
 
     return sortedArray;
 }
 
-void SortingAlgorithmVisualizer::countingSort(QVector<int>& array, int size, int exp)
+// Helper function
+void SortingAlgorithmVisualizer::countingSort(QVector<int>& array, int size, int pos)
 {
     QVector<int> output(size);
     QVector<int> count(10, 0);
 
-    // Count the occurrences of each digit
-    for (int i = 0; i < size; i++) {
-            ++count[(array[i] / exp) % 10];
+    // Counting the occurrences of each digit
+    for (int i = 0; i < size; i++)
+    {
+        ++count[(array[i] / pos) % 10];
     }
 
-    // Calculate the cumulative count
-    for (int i = 1; i < 10; i++) {
-            count[i] += count[i - 1];
+    // Calculating the cumulative count
+    for (int i = 1; i < 10; i++)
+    {
+        count[i] += count[i - 1];
     }
 
-    // Build the output array
-    for (int i = size - 1; i >= 0; i--) {
-            output[count[(array[i] / exp) % 10] - 1] = array[i];
-            --count[(array[i] / exp) % 10];
+    // Building the output array
+    for (int i = size - 1; i >= 0; i--)
+    {
+        output[count[(array[i] / pos) % 10] - 1] = array[i];
+        --count[(array[i] / pos) % 10];
     }
 
-    // Copy the output array to the original array
-    for (int i = 0; i < size; i++) {
-            array[i] = output[i];
+    // Copying the output array to the original array
+    for (int i = 0; i < size; i++)
+    {
+        array[i] = output[i];
     }
 }
 
+// Swap function to swap 2 elements within the array
 void SortingAlgorithmVisualizer::swap(QVector<int>& array, int index1, int index2)
 {
     int temp = array[index1];
