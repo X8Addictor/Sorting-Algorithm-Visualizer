@@ -1,6 +1,7 @@
 #include "sortingalgorithmvisualizer.h"
 #include "ui_sortingalgorithmvisualizer.h"
 #include <QAbstractTableModel>
+#include <QElapsedTimer>
 
 SortingAlgorithmVisualizer::SortingAlgorithmVisualizer(QWidget *parent) : QMainWindow(parent), ui(new Ui::SortingAlgorithmVisualizer)
 {
@@ -17,6 +18,7 @@ SortingAlgorithmVisualizer::SortingAlgorithmVisualizer(QWidget *parent) : QMainW
     // Connecting signal to slots
     connect(ui->generateArrayButton, &QPushButton::clicked, this, &SortingAlgorithmVisualizer::generateArrayClicked);
     connect(ui->startButton, &QPushButton::clicked, this, &SortingAlgorithmVisualizer::startButtonClicked);
+    connect(ui->algorithmCombo, &QComboBox::currentIndexChanged, this, &SortingAlgorithmVisualizer::algorithmComboCurrentIndexChanged);
 }
 
 SortingAlgorithmVisualizer::~SortingAlgorithmVisualizer()
@@ -65,43 +67,76 @@ void SortingAlgorithmVisualizer::generateArrayClicked()
 // Event handler for "Start" button
 void SortingAlgorithmVisualizer::startButtonClicked()
 {
-    QVector<int> sortedArray; // Creating a QVector to store the sorted array
+    if (unsortedArray.size() <= 0)
+    {
+        return;
+    }
 
     int select;
-    select = ui->algorithmCombo->currentIndex() + 1; // Retrieving the selected algorithm index from the combo box
+    select = ui->algorithmCombo->currentIndex(); // Retrieving the selected algorithm index from the combo box
+
+    QString timeTaken;
 
     switch (select)
     {
     case 1:
-        sortedArray = bubbleSort();
+        timeTaken = elapsedTime(&SortingAlgorithmVisualizer::bubbleSort);
         break;
 
     case 2:
-        sortedArray = selectionSort();
+        timeTaken = elapsedTime(&SortingAlgorithmVisualizer::selectionSort);
         break;
 
     case 3:
-        sortedArray = insertionSort();
+        timeTaken = elapsedTime(&SortingAlgorithmVisualizer::insertionSort);
         break;
 
     case 4:
-        sortedArray = mergeSort();
+        timeTaken = elapsedTime(&SortingAlgorithmVisualizer::mergeSort);
         break;
 
     case 5:
-        sortedArray = quickSort();
+        timeTaken = elapsedTime(&SortingAlgorithmVisualizer::quickSort);
         break;
 
     case 6:
-        sortedArray = heapSort();
+        timeTaken = elapsedTime(&SortingAlgorithmVisualizer::heapSort);
         break;
 
     case 7:
-        sortedArray = radixSort();
+        timeTaken = elapsedTime(&SortingAlgorithmVisualizer::radixSort);
         break;
     }
 
     arrayTableModel->setSortedData(sortedArray); // Setting the sorted array data in the ArrayTableModel
+    ui->timeTakenLabel->setText(timeTaken); // Setting the time taken for an algorithm to complete
+}
+
+// Function to calculate the time taken for an algorithm to complete
+QString SortingAlgorithmVisualizer::elapsedTime(QVector<int> (SortingAlgorithmVisualizer::*algorithm)())
+{
+    QElapsedTimer timer;
+    timer.start();
+
+    sortedArray = (this->*algorithm)();
+
+    qint64 timeElapsed = timer.nsecsElapsed(); // Time elapsed in nanoseconds
+    QString timeTaken;
+    int size = sortedArray.size();
+
+
+    if (size >= 5000)
+    {
+        timeElapsed /= 1000000; // Conversion to milliseconds
+        timeTaken = QString::number(timeElapsed) + " ms";
+    }
+    else
+    {
+        timeElapsed /= 1000; // Conversion to microseconds
+        timeTaken = QString::number(timeElapsed) + " μs";
+    }
+
+    return timeTaken;
 }
 
 // Function for generating the array based on given paratmeters
@@ -414,3 +449,53 @@ void SortingAlgorithmVisualizer::swap(QVector<int>& array, int index1, int index
     array[index1] = array[index2];
     array[index2] = temp;
 }
+
+// Event handler for displaying the time and space complexity
+void SortingAlgorithmVisualizer::algorithmComboCurrentIndexChanged(int index)
+{
+    ui->currentTimeComplexityLabel->setTextFormat(Qt::RichText);
+
+    switch (index)
+    {
+    case 0:
+        ui->currentTimeComplexityLabel->clear();
+        ui->currentSpaceComplexityLabel->clear();
+        break;
+
+    case 1:
+        ui->currentTimeComplexityLabel->setText("O(n<sup>2</sup>)");
+        ui->currentSpaceComplexityLabel->setText("O(1)");
+        break;
+
+    case 2:
+        ui->currentTimeComplexityLabel->setText("O(n<sup>2</sup>)");
+        ui->currentSpaceComplexityLabel->setText("O(1)");
+        break;
+
+    case 3:
+        ui->currentTimeComplexityLabel->setText("O(n<sup>2</sup>)");
+        ui->currentSpaceComplexityLabel->setText("O(1)");
+        break;
+
+    case 4:
+        ui->currentTimeComplexityLabel->setText("O(n log n)");
+        ui->currentSpaceComplexityLabel->setText("O(n)");
+        break;
+
+    case 5:
+        ui->currentTimeComplexityLabel->setText("O(n log n)");
+        ui->currentSpaceComplexityLabel->setText("O(log n)");
+        break;
+
+    case 6:
+        ui->currentTimeComplexityLabel->setText("O(n log n)");
+        ui->currentSpaceComplexityLabel->setText("O(1)");
+        break;
+
+    case 7:
+        ui->currentTimeComplexityLabel->setText("O(d * (n + k))");
+        ui->currentSpaceComplexityLabel->setText("O(n + k)");
+        break;
+    }
+}
+

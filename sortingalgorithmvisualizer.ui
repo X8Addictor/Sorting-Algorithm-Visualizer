@@ -57,6 +57,11 @@
     </property>
     <item>
      <property name="text">
+      <string>Select--</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Bubble Sort</string>
      </property>
     </item>
@@ -91,12 +96,12 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="complexityLabel">
+   <widget class="QLabel" name="timeComplexityLabel">
     <property name="geometry">
      <rect>
       <x>440</x>
       <y>160</y>
-      <width>300</width>
+      <width>111</width>
       <height>40</height>
      </rect>
     </property>
@@ -107,8 +112,8 @@
    <widget class="QLabel" name="timeLabel">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>550</y>
+      <x>430</x>
+      <y>510</y>
       <width>100</width>
       <height>40</height>
      </rect>
@@ -152,17 +157,17 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="speedValueLabel">
+   <widget class="QLabel" name="timeTakenLabel">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>600</y>
+      <x>550</x>
+      <y>510</y>
       <width>100</width>
       <height>40</height>
      </rect>
     </property>
     <property name="text">
-     <string>500 ms</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="startButton">
@@ -208,7 +213,7 @@
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>210</y>
+      <y>290</y>
       <width>90</width>
       <height>20</height>
      </rect>
@@ -221,7 +226,7 @@
     <property name="geometry">
      <rect>
       <x>440</x>
-      <y>270</y>
+      <y>350</y>
       <width>130</width>
       <height>20</height>
      </rect>
@@ -234,7 +239,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>250</y>
+      <y>330</y>
       <width>30</width>
       <height>20</height>
      </rect>
@@ -247,7 +252,7 @@
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>210</y>
+      <y>290</y>
       <width>90</width>
       <height>20</height>
      </rect>
@@ -257,7 +262,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>270</y>
+      <y>350</y>
       <width>90</width>
       <height>20</height>
      </rect>
@@ -267,7 +272,7 @@
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>270</y>
+      <y>350</y>
       <width>90</width>
       <height>20</height>
      </rect>
@@ -277,7 +282,7 @@
     <property name="geometry">
      <rect>
       <x>720</x>
-      <y>250</y>
+      <y>330</y>
       <width>25</width>
       <height>20</height>
      </rect>
@@ -294,6 +299,58 @@
       <width>401</width>
       <height>491</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentTimeComplexityLabel">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>160</y>
+      <width>121</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="spaceComplexityLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>210</y>
+      <width>111</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Space Complexity:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentSpaceComplexityLabel">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>210</y>
+      <width>121</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="timeTakenLabel_2">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>420</y>
+      <width>100</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

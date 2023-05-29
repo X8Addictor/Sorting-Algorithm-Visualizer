@@ -19,13 +19,16 @@ public:
 private slots:
     void generateArrayClicked();
     void startButtonClicked();
+    void algorithmComboCurrentIndexChanged(int index);
 
 private:
     Ui::SortingAlgorithmVisualizer *ui;
     ArrayTableModel *arrayTableModel;
     QVector<int> unsortedArray;
+    QVector<int> sortedArray;
 
     void generateArray(int size, int start, int end, QVector<int>& unsortedArray);
+    QString elapsedTime(QVector<int> (SortingAlgorithmVisualizer::*)());
     QVector<int> bubbleSort();
     QVector<int> selectionSort();
     QVector<int> insertionSort();
